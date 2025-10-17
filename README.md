@@ -19,7 +19,7 @@ This three-body interacting Hamiltonian describes symmetry-protected topological
 **Native Rydberg Hamiltonian (Equation 19):**
 
 $$
-H(t)/\hbar = \frac{\Omega(t)}{2} \sum_i \sigma^x_i - \Delta(t) \sum_i n_i + \sum_{i<j}  n_i n_j
+H(t)/\hbar = \frac{\Omega(t)}{2} \sum_i \sigma^x_i - \Delta(t) \sum_i n_i + \sum n_i n_j
 $$
 
 where:
