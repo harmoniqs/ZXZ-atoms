@@ -10,13 +10,17 @@ This repository implements quantum optimal control for simulating non-native ana
 
 **Target Hamiltonian (ZXZ Model - Cluster-Ising):**
 
-$$H_{\text{ZXZ}} = J_{\text{eff}} \sum_j Z_{j-1} X_j Z_{j+1}$$
+$$
+H_{\text{ZXZ}} = J_{\text{eff}} \sum_j Z_{j-1} X_j Z_{j+1}
+$$
 
 This three-body interacting Hamiltonian describes symmetry-protected topological (SPT) phases with edge modes, but cannot be directly implemented on Rydberg atom hardware.
 
 **Native Rydberg Hamiltonian (Equation 19):**
 
-$$H(t)/\hbar = \frac{\Omega(t)}{2} \sum_i \sigma^x_i - \Delta(t) \sum_i n_i + \sum_{i<j} \frac{C_6}{r_{ij}^6} n_i n_j$$
+$$
+H(t)/\hbar = \frac{\Omega(t)}{2} \sum_i \sigma^x_i - \Delta(t) \sum_i n_i + \sum_{i<j} \frac{C_6}{r_{ij}^6} n_i n_j
+$$
 
 where:
 - $\sigma^x_i$: Pauli-X operator coupling ground and Rydberg states (Rabi coupling)
