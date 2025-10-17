@@ -16,10 +16,11 @@ This three-body interacting Hamiltonian describes symmetry-protected topological
 
 **Native Rydberg Hamiltonian (Equation 19):**
 
-$$\frac{H(t)}{\hbar} = \frac{\Omega(t)}{2} \sum_i (|g_i\rangle\langle r_i| + |r_i\rangle\langle g_i|) - \Delta(t) \sum_i |r_i\rangle\langle r_i| + \sum_{i<j} \frac{C_6}{|r_i - r_j|^6} |r_i\rangle\langle r_i| |r_j\rangle\langle r_j|$$
+$$\frac{H(t)}{\hbar} = \frac{\Omega(t)}{2} \sum_i (\sigma^x_i) - \Delta(t) \sum_i n_i + \sum_{i<j} \frac{C_6}{|r_i - r_j|^6} n_i n_j$$
 
 where:
-- $|g_i\rangle$, $|r_i\rangle$: Ground and Rydberg excited states of atom $i$
+- $\sigma^x_i = |g_i\rangle\langle r_i| + |r_i\rangle\langle g_i|$: Pauli-X operator (Rabi coupling)
+- $n_i = |r_i\rangle\langle r_i|$: Number operator for Rydberg state
 - $\Omega(t)$: Time-dependent Rabi frequency driving $|g\rangle \leftrightarrow |r\rangle$ transitions (global control)
 - $\Delta(t)$: Time-dependent detuning of Rydberg level energy (global control)  
 - $C_6/|r_i - r_j|^6$: Van der Waals interactions between excited Rydberg atoms
