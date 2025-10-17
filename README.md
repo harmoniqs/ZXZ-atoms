@@ -9,28 +9,29 @@ This repository implements quantum optimal control for simulating non-native ana
 ### The Problem: From Native Two-Body to Engineered Three-Body Interactions
 
 **Target Hamiltonian (ZXZ Model - Cluster-Ising):**
-```
-H_ZXZ = J_eff ∑_j Z_{j-1} X_j Z_{j+1}
-```
+
+$$H_{\text{ZXZ}} = J_{\text{eff}} \sum_j Z_{j-1} X_j Z_{j+1}$$
+
 This three-body interacting Hamiltonian describes symmetry-protected topological (SPT) phases with edge modes, but cannot be directly implemented on Rydberg atom hardware.
 
 **Native Rydberg Hamiltonian (Equation 19):**
-```
-H(t)/ℏ = Ω(t)/2 ∑_l σ^x_l - Δ(t) ∑_l σ^z_l + ∑_{j<l} V_jl n_j n_l
-```
-where:
-- `Ω(t)`: Time-dependent Rabi frequency (global control)
-- `Δ(t)`: Time-dependent detuning (global control)  
-- `V_jl = C6/|r_j - r_l|^6`: Van der Waals interactions between Rydberg states
 
-**The Challenge:** Use only the native two-body interactions and global controls `Ω(t), Δ(t)` to engineer effective three-body ZXZ dynamics through optimal pulse sequences.
+$$\frac{H(t)}{\hbar} = \frac{\Omega(t)}{2} \sum_i (|g_i\rangle\langle r_i| + |r_i\rangle\langle g_i|) - \Delta(t) \sum_i |r_i\rangle\langle r_i| + \sum_{i<j} \frac{C_6}{|r_i - r_j|^6} |r_i\rangle\langle r_i| |r_j\rangle\langle r_j|$$
+
+where:
+- $|g_i\rangle$, $|r_i\rangle$: Ground and Rydberg excited states of atom $i$
+- $\Omega(t)$: Time-dependent Rabi frequency driving $|g\rangle \leftrightarrow |r\rangle$ transitions (global control)
+- $\Delta(t)$: Time-dependent detuning of Rydberg level energy (global control)  
+- $C_6/|r_i - r_j|^6$: Van der Waals interactions between excited Rydberg atoms
+
+**The Challenge:** Use only the native two-body interactions and global controls $\Omega(t)$, $\Delta(t)$ to engineer effective three-body ZXZ dynamics through optimal pulse sequences.
 
 ### Solution: Direct Quantum Optimal Control
 
 This project uses **direct trajectory optimization** (inspired by robotics) to design smooth, experimentally feasible control pulses that:
 
 1. **Synthesize effective three-body interactions** from native two-body Rydberg physics
-2. **Operate outside the blockade regime** (atoms spaced at 8.9 μm > blockade radius 8.37 μm)
+2. **Operate outside the blockade regime** (atoms spaced at $8.9 \, \mu\text{m} > 8.37 \, \mu\text{m}$ blockade radius)
 3. **Respect hardware constraints** (amplitude bounds, slew rates, finite resolution)
 4. **Achieve high-fidelity dynamics** while minimizing decoherence
 
@@ -123,15 +124,16 @@ using Piccolo
 include("src/ZXZAtoms.jl")
 using .ZXZAtoms
 
+```julia
 # Define target ZXZ Hamiltonian for 3 atoms
 H_eff = operator_from_string("ZXZ")
-U_goal = exp(-im * 0.8 * H_eff)  # Target evolution
+U_goal = exp(-im * 0.8 * H_eff)  # Target evolution U = exp(-iθH_ZXZ)
 
 # Setup Rydberg system (outside blockade regime)
 sys = RydbergChainSystem(N=3, distance=8.9, ignore_Y_drive=true)
 
-# Control bounds: [Rabi_min, Detuning_min] to [Rabi_max, Detuning_max]
-a_bounds = ([0.0, -100.0], [15.7, 100.0])
+# Control bounds: [Ω_min, Δ_min] to [Ω_max, Δ_max]
+a_bounds = ([0.0, -100.0], [15.7, 100.0])  # MHz
 
 # Create initial trajectory with random controls
 traj = unitary_rollout_trajectory(control_fn, G, T; 
@@ -169,9 +171,9 @@ validation_fidelity = unitary_fidelity(iso_vec_to_operator(rollout_traj[end].Ũ�
 | Parameter | Value | Description |
 |-----------|-------|-------------|
 | `N_atoms` | 3-5 | Number of atoms in chain |
-| `distance` | 8.9 μm | Inter-atom spacing (outside blockade) |
-| `Rabi_max` | 15.7 MHz | Maximum Rabi frequency |
-| `Delta_max` | 100.0 MHz | Maximum detuning |
+| `distance` | $8.9 \, \mu\text{m}$ | Inter-atom spacing (outside blockade) |
+| `Rabi_max` | $15.7 \, \text{MHz}$ | Maximum Rabi frequency $\Omega_{\max}$ |
+| `Delta_max` | $100.0 \, \text{MHz}$ | Maximum detuning $|\Delta_{\max}|$ |
 | `T` | 26 | Number of time samples |
 | `dt` | 0.05 | Time step size |
 | `θ` | 0.8 | Effective evolution parameter |
