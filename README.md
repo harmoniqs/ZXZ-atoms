@@ -19,9 +19,9 @@ This three-body interacting Hamiltonian describes symmetry-protected topological
 $$\frac{H(t)}{\hbar} = \frac{\Omega(t)}{2} \sum_i (\sigma^x_i) - \Delta(t) \sum_i n_i + \sum_{i<j} \frac{C_6}{|r_i - r_j|^6} n_i n_j$$
 
 where:
-- $\sigma^x_i = |g_i\rangle\langle r_i| + |r_i\rangle\langle g_i|$: Pauli-X operator (Rabi coupling)
-- $n_i = |r_i\rangle\langle r_i|$: Number operator for Rydberg state
-- $\Omega(t)$: Time-dependent Rabi frequency driving $|g\rangle \leftrightarrow |r\rangle$ transitions (global control)
+- $\sigma^x_i$: Pauli-X operator coupling ground and Rydberg states (Rabi coupling)
+- $n_i$: Number operator for Rydberg state occupation
+- $\Omega(t)$: Time-dependent Rabi frequency driving transitions (global control)
 - $\Delta(t)$: Time-dependent detuning of Rydberg level energy (global control)  
 - $C_6/|r_i - r_j|^6$: Van der Waals interactions between excited Rydberg atoms
 
@@ -32,7 +32,7 @@ where:
 This project uses **direct trajectory optimization** (inspired by robotics) to design smooth, experimentally feasible control pulses that:
 
 1. **Synthesize effective three-body interactions** from native two-body Rydberg physics
-2. **Operate outside the blockade regime** (atoms spaced at $8.9 \, \mu\text{m} > 8.37 \, \mu\text{m}$ blockade radius)
+2. **Operate outside the blockade regime** (atoms spaced at 8.9 μm > 8.37 μm blockade radius)
 3. **Respect hardware constraints** (amplitude bounds, slew rates, finite resolution)
 4. **Achieve high-fidelity dynamics** while minimizing decoherence
 
@@ -172,9 +172,9 @@ validation_fidelity = unitary_fidelity(iso_vec_to_operator(rollout_traj[end].Ũ�
 | Parameter | Value | Description |
 |-----------|-------|-------------|
 | `N_atoms` | 3-5 | Number of atoms in chain |
-| `distance` | $8.9 \, \mu\text{m}$ | Inter-atom spacing (outside blockade) |
-| `Rabi_max` | $15.7 \, \text{MHz}$ | Maximum Rabi frequency $\Omega_{\max}$ |
-| `Delta_max` | $100.0 \, \text{MHz}$ | Maximum detuning $|\Delta_{\max}|$ |
+| `distance` | 8.9 μm | Inter-atom spacing (outside blockade) |
+| `Rabi_max` | 15.7 MHz | Maximum Rabi frequency |
+| `Delta_max` | 100.0 MHz | Maximum detuning |
 | `T` | 26 | Number of time samples |
 | `dt` | 0.05 | Time step size |
 | `θ` | 0.8 | Effective evolution parameter |
