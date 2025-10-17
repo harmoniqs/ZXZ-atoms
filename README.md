@@ -24,10 +24,10 @@ $$
 
 where:
 - $\sigma^x_i$: Pauli-X operator coupling ground and Rydberg states (Rabi coupling)
-- $n_i$: Number operator for Rydberg state occupation
+- $n_i$: Number operator for Rydberg state occupation  
 - $\Omega(t)$: Time-dependent Rabi frequency driving transitions (global control)
 - $\Delta(t)$: Time-dependent detuning of Rydberg level energy (global control)  
-- $C_6/r_{ij}^6$: Van der Waals interactions between excited Rydberg atoms
+- $V\_{ij} = C_6/r\_{ij}^6$: Van der Waals interactions between excited Rydberg atoms
 
 **The Challenge:** Use only the native two-body interactions and global controls $\Omega(t)$, $\Delta(t)$ to engineer effective three-body ZXZ dynamics through optimal pulse sequences.
 
