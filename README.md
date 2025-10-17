@@ -16,14 +16,14 @@ This three-body interacting Hamiltonian describes symmetry-protected topological
 
 **Native Rydberg Hamiltonian (Equation 19):**
 
-$$\frac{H(t)}{\hbar} = \frac{\Omega(t)}{2} \sum_i (\sigma^x_i) - \Delta(t) \sum_i n_i + \sum_{i<j} \frac{C_6}{|r_i - r_j|^6} n_i n_j$$
+$$H(t)/\hbar = \frac{\Omega(t)}{2} \sum_i \sigma^x_i - \Delta(t) \sum_i n_i + \sum_{i<j} \frac{C_6}{r_{ij}^6} n_i n_j$$
 
 where:
 - $\sigma^x_i$: Pauli-X operator coupling ground and Rydberg states (Rabi coupling)
 - $n_i$: Number operator for Rydberg state occupation
 - $\Omega(t)$: Time-dependent Rabi frequency driving transitions (global control)
 - $\Delta(t)$: Time-dependent detuning of Rydberg level energy (global control)  
-- $C_6/|r_i - r_j|^6$: Van der Waals interactions between excited Rydberg atoms
+- $C_6/r_{ij}^6$: Van der Waals interactions between excited Rydberg atoms
 
 **The Challenge:** Use only the native two-body interactions and global controls $\Omega(t)$, $\Delta(t)$ to engineer effective three-body ZXZ dynamics through optimal pulse sequences.
 
